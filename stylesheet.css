@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 24px;
+}
+
+footer {
+    text-align: center;
+}
+
+#calculator-container {
+    width: 300px;
+    height: 500px;
+    margin: auto;
+}
+
+#calculator-display {
+    height: 48px;
+    border: 3px solid gray;
+    margin-bottom: 16px;
+}
+
+#calculator-buttons {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto auto;
+}
+
+button {
+    height: 64px;
+    width: auto;
+    margin: 1px;
+    font-size: 16px;
+}
