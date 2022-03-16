@@ -1,9 +1,9 @@
 //NOTES
-//  When pressing an operation button
-//    IF an operation has already been chosen
-//      Resolve current operation
-//      Set num1 value to result of operation
-//      Set operater to button pressed
+//  BUG
+//    Pressing EQUALS after inputting an operation but before inputting a second number
+//    attempts to resolve the operation
+//   
+//    Pressing EQUALS should only do ANYTHING if user has entered all three inputs (num1, num2, operator)
 
 const calculatorDisplay = document.querySelector("#display");
 const currentValueDisplay = document.querySelector('#testing');
@@ -150,29 +150,34 @@ function addListeners() {
     });
     // Equals
     buttons[14].addEventListener('click', () => {
-        num2 = +currentValue;
-        switch (operator) {
-            case "ADD":
-                operate(add);
-                break;
+        if (num1 != 0 && currentValue != "") {
+            num2 = +currentValue;
+            switch (operator) {
+                case "ADD":
+                    operate(add);
+                    break;
+    
+                case "SUBTRACT":
+                    operate(subtract);
+                    break;
+    
+                case "MULTIPLY":
+                    operate(multiply);
+                    break;
+    
+                case "DIVIDE":
+                    operate(divide);
+                    break;
+            }
+            num1 = 0;
+            num2 = 0;
+            currentValue = "";
+            displayValue = "";
+            operator = "";
+        } else {
 
-            case "SUBTRACT":
-                operate(subtract);
-                break;
-
-            case "MULTIPLY":
-                operate(multiply);
-                break;
-
-            case "DIVIDE":
-                operate(divide);
-                break;
         }
-        num1 = 0;
-        num2 = 0;
-        currentValue = "";
-        displayValue = "";
-        operator = "";
+       
         
     });
 
