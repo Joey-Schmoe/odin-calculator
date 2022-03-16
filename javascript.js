@@ -1,4 +1,8 @@
-const calculatorDisplay = document.querySelector("#calculator-display");
+//  NOTES
+//    Divide function is returning 0 or NaN when dividing large numbers
+//    Divide works on smaller numbers
+
+const calculatorDisplay = document.querySelector("#display");
 const currentValueDisplay = document.querySelector('#testing');
 let displayValue = "";
 let currentValue = "";
@@ -19,7 +23,7 @@ function updateCurrentValue(value) {
 }
 
 function addListeners() {
-    const buttons = document.querySelectorAll("button");
+    const buttons = document.querySelectorAll("#calculator-buttons button");
 
     // 7
     buttons[0].addEventListener('click', () => {
@@ -130,6 +134,8 @@ function addListeners() {
         display(" + ");
         updateCurrentValue("");
     });
+
+    document.querySelector("#button-clear").addEventListener('click', reset);
 }
 
 function display(value) {
@@ -138,6 +144,8 @@ function display(value) {
 }
 
 function reset() {
+    calculatorDisplay.textContent = "";
+    currentValueDisplay.textContent = "";
     displayValue = "";
     currentValue = "";
     num1 = 0;
@@ -165,4 +173,6 @@ function operate(operator) {
     const result = operator();
     displayValue = "";
     display(result);
+    console.log(`AFTER OPERATION - num1 = ${num1}`);
+    console.log(`AFTER OPERATION - num2 = ${num2}`);
 }

@@ -11,10 +11,15 @@ footer {
     width: 300px;
     height: 500px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #calculator-display {
     height: 36px;
+    width: 125%;
     border: 3px solid gray;
     margin-bottom: 16px;
     padding: 12px;
@@ -30,6 +35,14 @@ footer {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto auto auto;
+
+    width: 300px;
+}
+
+#button-clear {
+    margin-right: auto;
+    margin-left: -15px;
+    width: 64px;
 }
 
 button {
