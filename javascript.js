@@ -1,6 +1,9 @@
-//  NOTES
-//    Divide function is returning 0 or NaN when dividing large numbers
-//    Divide works on smaller numbers
+//NOTES
+//  When pressing an operation button
+//    IF an operation has already been chosen
+//      Resolve current operation
+//      Set num1 value to result of operation
+//      Set operater to button pressed
 
 const calculatorDisplay = document.querySelector("#display");
 const currentValueDisplay = document.querySelector('#testing');
@@ -14,21 +17,46 @@ addListeners();
 
 function updateCurrentValue(value) {
     if (value != "") {
-
         currentValue += value;
-        console.log(`value = ${{value}}`);
-        console.log(`currentValue = ${currentValue}`);
-        console.log(`num1 = ${num1}`);
-        console.log(`num2 = ${num2}`);
     } else {
-        console.log(`value = ${{value}}`);
-        console.log(`currentValue = ${currentValue}`);
-        console.log(`num1 = ${num1}`);
-        console.log(`num2 = ${num2}`);
         currentValue = "";
     }
 
     currentValueDisplay.textContent = currentValue;
+}
+
+function setOperation(operation, displayString) {
+    if (operator == "") {
+        //User has pressed an operation button for the first time, only num1 has been set
+        num1 = +currentValue;
+    } else {
+        //User has set num1, num2, and operation
+        //  Resolve current operation
+        num2 = +currentValue;
+        switch (operator) {
+            case "ADD":
+                num1 = operate(add);
+                break;
+
+            case "SUBTRACT":
+                num1 = operate(subtract);
+                break;
+
+            case "MULTIPLY":
+                num1 = operate(multiply);
+                break;
+
+            case "DIVIDE":
+                num1 = operate(divide);
+                break;
+        }
+
+    }
+
+    currentValue = "";
+    operator = operation;
+    display(` ${displayString} `);
+    updateCurrentValue("");
 }
 
 function addListeners() {
@@ -51,11 +79,13 @@ function addListeners() {
     });
     // Divide
     buttons[3].addEventListener('click', () => {
-        num1 = +currentValue;
-        currentValue = "";
-        operator = "DIVIDE";
-        display(" / ");
-        updateCurrentValue("");
+        // num1 = +currentValue;
+        // currentValue = "";
+        // operator = "DIVIDE";
+        // display(" / ");
+        // updateCurrentValue("");
+
+        setOperation("DIVIDE", "/");
     });
     // 4
     buttons[4].addEventListener('click', () => {
@@ -74,11 +104,13 @@ function addListeners() {
     });
     // Multiply
     buttons[7].addEventListener('click', () => {
-        num1 = +displayValue;
-        currentValue = "";
-        operator = "MULTIPLY";
-        display(" x ");
-        updateCurrentValue("");
+        // num1 = +displayValue;
+        // currentValue = "";
+        // operator = "MULTIPLY";
+        // display(" x ");
+        // updateCurrentValue("");
+
+        setOperation("MULTIPLY", "x");
     });
     // 1
     buttons[8].addEventListener('click', () => {
@@ -97,15 +129,18 @@ function addListeners() {
     });
     // Subtract
     buttons[11].addEventListener('click', () => {
-        num1 = +displayValue;
-        currentValue = "";
-        operator = "SUBTRACT";
-        display(" - ");
-        updateCurrentValue("");
+        // num1 = +displayValue;
+        // currentValue = "";
+        // operator = "SUBTRACT";
+        // display(" - ");
+        // updateCurrentValue("");
+
+        setOperation("SUBTRACT", "-");
     });
     // 0
     buttons[12].addEventListener('click', () => {
         display("0");
+        //0 must be added as a string, otherwise multiple 0's in a row doesn't work
         updateCurrentValue("0");
     });
     // Decimal
@@ -133,15 +168,23 @@ function addListeners() {
                 operate(divide);
                 break;
         }
+        num1 = 0;
+        num2 = 0;
+        currentValue = "";
+        displayValue = "";
+        operator = "";
+        
     });
 
     // Plus
     buttons[15].addEventListener('click', () => {
-        num1 = +displayValue;
-        currentValue = "";
-        operator = "ADD";
-        display(" + ");
-        updateCurrentValue("");
+        // num1 = +displayValue;
+        // currentValue = "";
+        // operator = "ADD";
+        // display(" + ");
+        // updateCurrentValue("");
+
+        setOperation("ADD", "+");
     });
 
     document.querySelector("#button-clear").addEventListener('click', reset);
@@ -184,4 +227,6 @@ function operate(operator) {
     display(result);
     console.log(`AFTER OPERATION - num1 = ${num1}`);
     console.log(`AFTER OPERATION - num2 = ${num2}`);
+    num2 = 0;
+    return result;
 }
