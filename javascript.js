@@ -14,8 +14,17 @@ addListeners();
 
 function updateCurrentValue(value) {
     if (value != "") {
-        currentValue += +value;
+
+        currentValue += value;
+        console.log(`value = ${{value}}`);
+        console.log(`currentValue = ${currentValue}`);
+        console.log(`num1 = ${num1}`);
+        console.log(`num2 = ${num2}`);
     } else {
+        console.log(`value = ${{value}}`);
+        console.log(`currentValue = ${currentValue}`);
+        console.log(`num1 = ${num1}`);
+        console.log(`num2 = ${num2}`);
         currentValue = "";
     }
 
@@ -96,8 +105,8 @@ function addListeners() {
     });
     // 0
     buttons[12].addEventListener('click', () => {
-        display(0);
-        updateCurrentValue(0);
+        display("0");
+        updateCurrentValue("0");
     });
     // Decimal
     buttons[13].addEventListener('click', () => {
