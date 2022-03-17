@@ -269,15 +269,19 @@ function multiply() {
 }
 
 function divide() {
-    return +num1 / +num2;
+    if (+num2 == 0) {
+        num1 = 0;
+        return "You shouldn't have done that";
+    } else {
+        return +num1 / +num2;
+    }
+
 }
 
 function operate(operator) {
     const result = operator();
     displayValue = "";
     display(result);
-    console.log(`AFTER OPERATION - num1 = ${num1}`);
-    console.log(`AFTER OPERATION - num2 = ${num2}`);
     num2 = 0;
     return result;
 }
