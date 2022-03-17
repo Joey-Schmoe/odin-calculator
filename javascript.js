@@ -236,7 +236,13 @@ function addListeners() {
 }
 
 function display(value) {
-    displayValue += value.toString();
+    if (typeof value ===  "number") {
+        //Round to 5 decimal places
+        displayValue += (Math.round(value * 100000) / 100000).toString();
+    } else {
+        displayValue += value.toString();
+    }
+    
     calculatorDisplay.textContent = displayValue;
 }
 
